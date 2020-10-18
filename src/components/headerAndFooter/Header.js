@@ -1,32 +1,26 @@
 ﻿// eslint-disable-next-line
 
 import React, { Component } from 'react'
-import '../css/carousel.css'
+import '../../css/carousel.css'
 import 'bootstrap/dist/css/bootstrap.css'
 // import $ from 'jquery'
 import { } from 'bootstrap'
-import logo from '../assets/images/logos/Cpascher_logo_small.png'
-import BusinessHttp from '../business/Http'
-import BusinessCart from '../business/Cart'
+import logo from '../../assets/images/logos/Cpascher_logo_small.png'
+import BusinessHttp from '../../business/Http'
+import BusinessCart from '../../business/Cart'
 
-import CartNavButton from './CartNavButtonRef'
-import SearchNavBar from './SearchNavBar'
+import CartNavButton from '../cart/CartNavButtonRef'
+import SearchNavBar from '../search/SearchNavBar'
 
 const home = BusinessHttp.fullyQualifiedName()
 
 class CpcHeader extends Component {
-  constructor (props) {
-    super(props)
-    this.props = props
+  constructor () {
+    super()
 
     this.handleSubmitSearch = this.handleSubmitSearch.bind(this)
 
     this.state = { cartCount: BusinessCart.count }
-    this._cartCtaRef = this.props.cartCtaRef
-  }
-
-  componentDidMount () {
-    console.log({ header_didMount: this._cartCtaRef })
   }
 
   handleSubmitSearch (value) {
@@ -65,7 +59,7 @@ class CpcHeader extends Component {
               </li>
             </ul>
             <SearchNavBar onSubmitSearch={this.handleSubmitSearch} />
-            <CartNavButton ref={this._cartCtaRef} />
+            <CartNavButton ref={this.props.cartCtaRef} />
           </div>
         </nav>
 

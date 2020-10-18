@@ -1,21 +1,17 @@
 import React, { Component } from 'react'
-import ScreenModal from './ScreenModal'
-import BusinessHttp from '../business/Http'
+import ScreenModal from '../modal/ScreenModal'
+import BusinessHttp from '../../business/Http'
 
 const home = BusinessHttp.fullyQualifiedName
 
 class PromoPopin extends Component {
-  constructor (props) {
-    super(props)
-    this._gotItCta = null
-    this._closePopinCta = null
-
-    console.log({ isVisible: props.isVisible })
+  constructor () {
+    super()
 
     this.handleGotItClick = this.handleGotItClick.bind(this)
     this.handleClosePopinClick = this.handleClosePopinClick.bind(this)
 
-    this.state = { isVisible: props.isVisible !== undefined ? props.isVisible : false }
+    this.state = { isVisible: false }
   }
 
   handleGotItClick () {
@@ -29,7 +25,9 @@ class PromoPopin extends Component {
   }
 
   render () {
-    if (!this.state.isVisible) {
+    const isVisible =  this.props.isVisible !== undefined ? this.props.isVisible : false 
+
+    if (!isVisible) {
       return (
         ''
       )

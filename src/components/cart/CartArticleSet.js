@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import uuid from 'react-uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import BusinessCart from '../business/Cart'
-import BusinessOffer from '../business/Offer'
+import BusinessCart from '../../business/Cart'
+import BusinessOffer from '../../business/Offer'
 
 class CartArticleSet extends Component {
   constructor (props) {
@@ -18,8 +18,6 @@ class CartArticleSet extends Component {
   }
 
   componentDidMount () {
-    console.log({ CartArticleSet_didMount: this._cartCtaRef })
-
     this.computeCart()
   }
 
@@ -123,33 +121,27 @@ class CartArticleSet extends Component {
 }
 
 class ArticleLine extends Component {
-  constructor (props) {
-    super(props)
 
-    this.handleClick = this.handleClick.bind(this)
-    const article = this.props.article
-    this.index = this.props.index
-    this.cover = article.cover
-    this.price = parseFloat(article.price).toFixed(2)
-    this.title = article.title
-    this.isbn = article.isbn
-    this.keyid = article.keyid
-  }
-
-  handleClick (e) {
+  handleClick () {
     this.props.onRemove(this.keyid)
   }
 
   render () {
+    const article = this.props.article
+    const cover = article.cover
+    const price = parseFloat(article.price).toFixed(2)
+    const title = article.title
+    this.keyid = article.keyid
+
     return (
       <tr>
-        <td><img src={this.cover} width='40' height='60' alt='Article card' /> </td>
-        <td>{this.title}</td>
+        <td><img src={cover} width='40' height='60' alt='Article card' /> </td>
+        <td>{title}</td>
         <td>En stock</td>
         <td><input className='form-control' type='text' value='1' readOnly /></td>
-        <td className='text-right'>{this.price} €</td>
+        <td className='text-right'>{price} €</td>
         <td className='text-right'>
-          <button onClick={this.handleClick} className='remove-from-cart-cta btn btn-sm btn-danger'>
+          <button onClick={this.handleClick.bind(this)} className='remove-from-cart-cta btn btn-sm btn-danger'>
             <FontAwesomeIcon pointerEvents='none' icon={faTrash} />
           </button>
         </td>
